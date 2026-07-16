@@ -112,7 +112,7 @@ dashboardUrl: "https://lookerstudio.google.com/..."
 curl -X POST https://{내-배포-주소}/api/posts \
   -H "Authorization: Bearer {PUBLISH_API_KEY}" \
   -H "Content-Type: application/json" \
-  -d '{"title":"첫 자동 발행","description":"발행 API 테스트","content":"본문입니다."}'
+  -d '{"title":"첫 자동 발행","description":"발행 API 테스트","content":"본문입니다.","draft":false}'
 ```
 
 실적 리포트는 `collection: "reports"`를 함께 보냅니다.
@@ -124,7 +124,8 @@ curl -X POST https://{내-배포-주소}/api/posts \
   "description": "데이터 분석 결과 요약",
   "period": "2026-Q2",
   "dashboardUrl": "https://lookerstudio.google.com/...",
-  "content": "## 요약\n\n본문입니다."
+  "content": "## 요약\n\n본문입니다.",
+  "draft": false
 }
 ```
 
@@ -136,8 +137,8 @@ curl -X POST https://{내-배포-주소}/api/posts \
 | 409 | 같은 slug의 파일이 이미 있음 |
 | 422 | 필수 필드 누락·형식 오류 (`fields`에 상세) |
 
-로컬 개발에서는 `GITHUB_TOKEN`이 없으면 `content/<collection>/`에 파일을 직접 씁니다.
-Vercel 배포 환경에서는 GitHub Contents API로 커밋합니다.
+로컬 개발(`NODE_ENV=development`)에서는 GitHub 환경변수의 유무와 관계없이 `content/<collection>/`에 파일을 직접 씁니다.
+Vercel 배포 환경에서는 `GITHUB_TOKEN`과 `GITHUB_REPO`가 설정되어 있으면 GitHub Contents API로 커밋합니다.
 
 ## 히어로 영상 슬롯
 

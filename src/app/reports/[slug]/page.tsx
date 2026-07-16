@@ -3,7 +3,7 @@ import { notFound } from "next/navigation";
 import DashboardEmbed from "@/components/DashboardEmbed";
 import { getAll, getOne, renderMarkdown } from "@/lib/content";
 
-export const dynamicParams = false;
+export const dynamicParams = true;
 
 export function generateStaticParams() {
   return getAll("reports").map((r) => ({ slug: r.slug }));

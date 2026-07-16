@@ -53,8 +53,8 @@ MAGMA(3040 남성 패션 브랜드)의 회사소개 사이트 스타터입니다
 
 | 환경 | 저장 방식 |
 | --- | --- |
-| 로컬 dev (`GITHUB_TOKEN` 없음) | `content/<collection>/{slug}.md`에 직접 쓰기 |
-| 배포(Vercel) | GitHub Contents API로 `content/<collection>/{slug}.md` 커밋 → 자동 재배포 |
+| 로컬 dev (`NODE_ENV=development`) | GitHub 환경변수 유무와 관계없이 `content/<collection>/{slug}.md`에 직접 쓰기 |
+| 배포(Vercel) | `GITHUB_TOKEN`·`GITHUB_REPO`가 있으면 GitHub Contents API로 `content/<collection>/{slug}.md` 커밋 → 자동 재배포 |
 
 환경변수:
 

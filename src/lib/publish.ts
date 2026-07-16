@@ -38,14 +38,14 @@ export async function publishPost(input: unknown): Promise<PublishResult> {
   const date = p.date ?? kstToday();
   const md = buildMarkdown({ ...p, date });
 
+  if (process.env.NODE_ENV === "development") {
+    writeLocal(p.collection, slug, md);
+    return { collection: p.collection, slug, url: contentHref(p.collection, slug), mode: "local" };
+  }
   const hasGitHub = !!(process.env.GITHUB_TOKEN && process.env.GITHUB_REPO);
   if (hasGitHub) {
     const commitUrl = await commitToGitHub(p.collection, slug, md);
     return { collection: p.collection, slug, url: contentHref(p.collection, slug), mode: "github", commitUrl };
-  }
-  if (process.env.NODE_ENV === "development") {
-    writeLocal(p.collection, slug, md);
-    return { collection: p.collection, slug, url: contentHref(p.collection, slug), mode: "local" };
   }
   throw new PublishError(500, {
     error: "GITHUB_TOKEN·GITHUB_REPO 미설정 — Vercel 환경변수를 확인하세요 (.env.example 참고)",

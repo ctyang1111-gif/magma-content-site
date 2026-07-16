@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { getAll, getOne, renderMarkdown } from "@/lib/content";
 
-export const dynamicParams = false;
+export const dynamicParams = true;
 
 export function generateStaticParams() {
   return getAll("posts").map((p) => ({ slug: p.slug }));
