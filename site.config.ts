@@ -32,7 +32,7 @@ export const siteConfig: SiteConfig = {
     // 모션그래픽을 만들어 public/hero.mp4 로 저장한 뒤, 아래 video 를 "/hero.mp4" 로만 바꾸면
     // 홈 배경이 영상으로 바뀝니다 (HeroMedia.tsx 컴포넌트는 손대지 않습니다).
     // null 로 두면 poster 이미지로 완전히 동작합니다.
-    video: null,
+    video: "/hero.mp4",
     poster: "/images/magma-hero-poster.png",
   },
 };
